@@ -1,0 +1,13 @@
+{
+  "name": "sap-ui-table-sample--basic",
+  "version": "1.0.0",
+  "author": "SAP SE",
+  "description": "Sample: Basic",
+  "scripts": {
+    "start": "ui5 serve",
+    "build": "ui5 build"
+  },
+  "devDependencies": {
+    "@ui5/cli": "^3.9.2"
+  }
+}
