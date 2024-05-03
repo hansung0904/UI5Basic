@@ -9,12 +9,17 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			var oData = {
 				modelData: [
-					{supplier: "Titanium", street: "401 23rd St", city: "Port Angeles", phone: "5682-121-828", openOrders: 10},
-					{supplier: "Technocom", street: "51 39th St", city: "Smallfield", phone: "2212-853-789", openOrders: 0},
-					{supplier: "Red Point Stores", street: "451 55th St", city: "Meridian", phone: "2234-245-898", openOrders: 5},
-					{supplier: "Technocom", street: "40 21st St", city: "Bethesda", phone: "5512-125-643", openOrders: 0},
-					{supplier: "Very Best Screens", street: "123 72nd St", city: "McLean", phone: "5412-543-765", openOrders: 6},
-					{supplier: "Chs", street: "1234 73nd St", city: "Ulsan", phone: "010-1234-4567", openOrders: 7}
+					{id: "1", division: "정기",   			QuoteNumber: "KMHD1*****", 	productCode: "Code1", contractDate: "2024/04/12", accountNumber: "1", customerName: "씨제이푸드", customerNumber: "IU974B", totalCount: "10", recommendationCustomerDate: "연간계획표", recommendationCustomerTime: "13:50",  region: "강동구/암사동", manager: "김종인", week: "1", Day: "월", totalExecution: "1/10", bugIssue: "Y", finalAdjustVisit: "2024/04/12", finalVisitTime: "오후 1:50~오후 2:30", reformDate: "2024/04/12"},
+					{id: "2", division: "부정기", 			QuoteNumber: "KMHD1*****", 	productCode: "Code1", contractDate: "2024/04/12", accountNumber: "10",customerName: "김밥천국",   customerNumber: "IU974B", totalCount: "1",  recommendationCustomerDate: "2024/04/12", recommendationCustomerTime: "13:50", region: "강동구/암사동", manager: "미배정", week: "-", Day: "-",  totalExecution: "0/1",  bugIssue: "N", finalAdjustVisit: "",           finalVisitTime: "",					reformDate: ""},
+					{id: "3", division: "부정기", 			QuoteNumber: "KMHD1*****", 	productCode: "Code1", contractDate: "2024/04/12", accountNumber:"2",  customerName: "강동스크린", customerNumber: "IU974B", totalCount: "2",  recommendationCustomerDate: "2024/04/16", recommendationCustomerTime: "13:50", region: "강동구/암사동", manager: "김종인", week: "-", Day: "-",  totalExecution: "1/2",  bugIssue: "N", finalAdjustVisit: "2024/04/12", finalVisitTime: "오후 1:50~오후 2:30", reformDate: "2024/04/12"},
+					{id: "4", division: "부정기", 			QuoteNumber: "KMHD1*****", 	productCode: "Code1", contractDate: "2024/04/12", accountNumber:"2",  customerName: "세븐일레븐", customerNumber: "IU974B", totalCount: "2",  recommendationCustomerDate: "2024/04/26", recommendationCustomerTime: "13:50", region: "강동구/암사동", manager: "미배정", week: "-", Day: "-",  totalExecution: "0/2",  bugIssue: "N", finalAdjustVisit: "",           finalVisitTime: "-",					reformDate: ""},
+					{id: "5", division: "VOC",  			QuoteNumber: "KMHD1*****", 	productCode: "Code1", contractDate: "2024/04/12", accountNumber:"-",  customerName: "엔딩스터디", customerNumber: "IU974B", totalCount: "-", recommendationCustomerDate: "-", 			recommendationCustomerTime: "13:50", region: "강동구/암사동", manager: "김종인", week: "-", Day: "-", totalExecution: "-",    bugIssue: "N", finalAdjustVisit: "-",           finalVisitTime: "-",					reformDate: "2024/04/12"},
+					{id: "6", division: "VOC",  			QuoteNumber: "-", 			productCode: "Code1", contractDate:"2024/04/12" , accountNumber:"-",  customerName: "매머드커피", customerNumber: "IU974B", totalCount: "-", recommendationCustomerDate: "-", 			recommendationCustomerTime: "13:50", region: "강동구/암사동", manager: "김종인", week: "-", Day: "-", totalExecution: "-",    bugIssue: "N", finalAdjustVisit: "-",           finalVisitTime: "-",					reformDate: "2024/04/12"},
+					{id: "7", division: "VOC",  			QuoteNumber: "-", 			productCode: "Code1", contractDate:"2024/04/12" , accountNumber:"-",  customerName: "이느커피",   customerNumber: "IU974B", totalCount: "-", recommendationCustomerDate: "-", 			recommendationCustomerTime: "13:50", region: "강동구/암사동", manager: "김종인", week: "-", Day: "-", totalExecution: "-",    bugIssue: "N", finalAdjustVisit: "-",           finalVisitTime: "-",					reformDate: "2024/04/12"},
+					{id: "8", division: "VOC",  			QuoteNumber: "-", 			productCode: "Code1", contractDate:"2024/04/12" , accountNumber:"-",  customerName: "이마트가양", customerNumber: "IU974B", totalCount: "-", recommendationCustomerDate: "-", 			recommendationCustomerTime: "13:50", region: "강동구/암사동", manager: "김종인", week: "-", Day: "-", totalExecution: "-",    bugIssue: "N", finalAdjustVisit: "-",           finalVisitTime: "-",					reformDate: "2024/04/12"},
+					{id: "9", division: "정기", 			QuoteNumber: "KMHD1*****", 	productCode: "Code1", contractDate: "2024/04/12", accountNumber:"10", customerName: "미니스톱",   customerNumber: "IU974B", totalCount: "10",recommendationCustomerDate: "연간계획표",   recommendationCustomerTime: "13:50", region: "강동구/암사동", manager: "미배정", week: "",  Day: "",  totalExecution: "",     bugIssue: "N", finalAdjustVisit: "",            finalVisitTime: "-",					 reformDate: ""},
+					{id: "10",division: "정기(타지사 이관)", QuoteNumber: "KMHD1*****",  productCode: "Code1", contractDate: "2024/04/12", accountNumber:"10", customerName: "GS편의점",   customerNumber: "IU974B", totalCount: "10",recommendationCustomerDate: "연간계획표",   recommendationCustomerTime: "13:50", region: "강동구/암사동", manager: "미배정", week: "",  Day: "",  totalExecution: "",     bugIssue: "N", finalAdjustVisit: "",            finalVisitTime: "-",				  reformDate: ""},
+					
 				]
 			};
 			var oView = this.getView();
@@ -65,8 +70,6 @@ sap.ui.define([
 		// 		}
 		// 	}.bind(this), 0);
 		// },
-		
-		
 	
 	});
 });
