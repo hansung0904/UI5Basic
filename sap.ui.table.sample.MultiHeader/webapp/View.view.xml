@@ -1,4 +1,4 @@
-<mvc:View
+<mvc:View xmlns:core="sap.ui.core"
 	controllerName="sap.ui.table.sample.MultiHeader.Controller"
 	xmlns="sap.ui.table"
 	xmlns:mvc="sap.ui.core.mvc"
@@ -13,9 +13,10 @@
 				id="table1"
 				selectionMode="None"
 				columnHeaderVisible="true"
-				columnHeaderHeight="50%"
-				visibleRowCountMode="Auto"
+				columnHeaderHeight="30%"
+				
 				rows="{/modelData}"
+				enableColumnReordering="false"
 				
 				>
 				<extension>
@@ -24,138 +25,149 @@
 					</m:OverflowToolbar>
 				</extension>
 				<columns>
-					<Column	width="auto" id="supplierColumn" resizable="false">
-						<m:Text text="No" textAlign="Center" width="auto"/>
+					<Column	width="5rem" id="supplierColumn" resizable="false">
+						<m:Text text="No" textAlign="Center" width="100%"/>
 							<template>
-								<m:Text text=""/>
+								<m:Text text="1" textAlign="Center" width="100%"/>
 							</template>
 					</Column>
 				<Column
-					width="auto" id="supplierColumn2" resizable="false">
-					<m:Text text="구분" textAlign="Center" width="auto"/>
+					width="5rem" id="supplierColumn2" resizable="false">
+					<m:Text text="구분" textAlign="Center" width="100%"/>
 					<template>
-						<m:Text visible="false"/>
+						<m:Text text="True/False"/>
 					</template>
 				</Column>
-					
 					<Column
-						width="auto"
-						headerSpan="10"
+						width="10rem"
+						headerSpan="11"
 						resizable="false">
 						<multiLabels>
-							<m:Label text="계약사항" textAlign="Center" width="auto"/>
-							<m:Label text="견적번호" textAlign="Center" width="auto"/>
+							<m:Label class="contractDetail" text="계약사항" textAlign="Center" width="100%"/>
+							<m:Label text="견적번호" textAlign="Center" width="100%"/>
 						</multiLabels>
 						<template>
 							<m:Text text="{street}" wrapping="false"/>
 						</template>
 					</Column>
 					<Column
-						width="auto"
+						width="5rem"
 						resizable="false">
 						<multiLabels>
 							<m:Label visible="false"/>
-							<m:Label text="상품코드" textAlign="Center" width="auto"/>
+							<m:Label text="상품코드" textAlign="Center" width="100%"/>
 						</multiLabels>
 						<template>
 							<m:Input value="{phone}"/>
 						</template>
 					</Column>
 					<Column
-						width="auto"
+						width="5rem"
 						resizable="false">
 						<multiLabels>
 							<m:Label visible="false"/>
-							<m:Label text="계약일자" textAlign="Center" width="auto"/>
+							<m:Label text="계약일자" textAlign="Center" width="100%"/>
 						</multiLabels>
 						<template>
 							<m:Input value="{phone}"/>
 						</template>
 					</Column>
 					<Column
-						width="auto"
+						width="5rem"
 						resizable="false">
 						<multiLabels>
 							<m:Label visible="false"/>
-							<m:Label text="계정수" textAlign="Center" width="auto"/>
+							<m:Label text="계정수" textAlign="Center" width="100%"/>
 						</multiLabels>
 						<template>
 							<m:Input value="{phone}"/>
 						</template>
 					</Column>
 					<Column
-						width="auto"
+						width="5rem"
 						resizable="false">
 						<multiLabels>
 							<m:Label visible="false"/>
-							<m:Label text="고객명" textAlign="Center" width="auto"/>
+							<m:Label text="고객명" textAlign="Center" width="100%"/>
 						</multiLabels>
 						<template>
 							<m:Input value="{phone}"/>
 						</template>
 					</Column>
 					<Column
-						width="auto"
+						width="5rem"
 						resizable="false">
 						<multiLabels>
 							<m:Label visible="false"/>
-							<m:Label text="고객번호" textAlign="Center" width="auto"/>
+							<m:Label text="고객번호" textAlign="Center" width="100%"/>
 						</multiLabels>
 						<template>
 							<m:Input value="{phone}"/>
 						</template>
 					</Column>
 					<Column
-						width="auto"
+						width="5rem"
 						resizable="false">
 						<multiLabels>
 							<m:Label visible="false"/>
-							<m:Label text="총횟수" textAlign="Center" width="auto"/>
+							<m:Label text="총횟수" textAlign="Center" width="100%"/>
 						</multiLabels>
 						<template>
 							<m:Input value="{phone}"/>
 						</template>
 					</Column>
 					<Column
-						width="auto"
+						width="5rem"
 						resizable="false">
 						<multiLabels>
 							<m:Label visible="false"/>
-							<m:Label text="고객요청일자" textAlign="Center" width="auto"/>
+							<m:Label text="고객요청일자" textAlign="Center" width="100%"/>
 						</multiLabels>
 						<template>
 							<m:Input value="{phone}"/>
 						</template>
 					</Column>
 					<Column
-						width="auto"
+						width="5rem"
 						resizable="false">
 						<multiLabels>
 							<m:Label visible="false"/>
-							<m:Label text="고객요청시간" textAlign="Center" width="auto"/>
+							<m:Label text="고객요청시간" textAlign="Center" width="100%"/>
 						</multiLabels>
 						<template>
 							<m:Input value="{phone}"/>
 						</template>
 					</Column>
 					<Column
-						width="auto"
-						resizable="true">
+						width="3rem"
+						resizable="false">
 						<multiLabels>
 							<m:Label visible="false"/>
-							<m:Label text="지역" textAlign="Center" width="auto"/>
+							<m:Label text="지역" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Input value="{phone}"/>
+						</template>
+					</Column>
+					<!-- TEST부 -->
+					<Column
+						width="3rem"
+						resizable="false">
+						<multiLabels>
+							<m:Label visible="false"/>
+							<m:Label text="지역" textAlign="Center" width="100%"/>
 						</multiLabels>
 						<template>
 							<m:Input value="{phone}"/>
 						</template>
 					</Column>
 					<Column
-						width="auto"
-						headerSpan="8"
+						width="10rem"
+						headerSpan="9"
 						resizable="false">
 						<multiLabels> 
-							<m:Label text="배정사항" textAlign="Center" width="auto"/>
-							<m:Label text="담당자" textAlign="Center" width="auto"/>
+							<m:Label class="assginedDetail" text="배정사항" textAlign="Center" width="100%"/>
+							<m:Label text="담당자" textAlign="Center" width="100%"/>
 						</multiLabels>
 						<template>
 							<m:Input value="{phone}"/>
@@ -166,7 +178,7 @@
 						resizable="false">
 						<multiLabels>
 							<m:Label text="배정사항"/>
-							<m:Label text="주차" textAlign="Center" width="auto"/>
+							<m:Label text="주차" textAlign="Center" width="100%"/>
 						</multiLabels>
 						<template>
 							<m:Input value="{phone}"/>
@@ -177,7 +189,7 @@
 						resizable="false">
 						<multiLabels>
 							<m:Label text="배정사항"/>
-							<m:Label text="요일" textAlign="Center" width="auto"/>
+							<m:Label text="요일" textAlign="Center" width="100%"/>
 						</multiLabels>
 						<template>
 							<m:Input value="{phone}"/>
@@ -188,7 +200,7 @@
 						resizable="false">
 						<multiLabels>
 							<m:Label text="배정사항"/>
-							<m:Label text="총수행" textAlign="Center" width="auto"/>
+							<m:Label text="총수행" textAlign="Center" width="100%"/>
 						</multiLabels>
 						<template>
 							<m:Input value="{phone}"/>
@@ -199,7 +211,7 @@
 						resizable="false">
 						<multiLabels>
 							<m:Label text="배정사항"/>
-							<m:Label text="해충이슈" textAlign="Center" width="auto"/>
+							<m:Label text="해충이슈" textAlign="Center" width="100%"/>
 						</multiLabels>
 						<template>
 							<m:Input value="{phone}"/>
@@ -221,7 +233,7 @@
 						resizable="false">
 						<multiLabels>
 							<m:Label text="배정사항"/>
-							<m:Label text="최종방문시간" textAlign="Center" width="auto"/>
+							<m:Label text="최종방문시간" textAlign="Center" width="100%"/>
 						</multiLabels>
 						<template>
 							<m:Input value="{phone}"/>
@@ -232,7 +244,18 @@
 						resizable="false">
 						<multiLabels>
 							<m:Label text="배정사항"/>
-							<m:Label text="수정일자" textAlign="Center" width="auto"/>
+							<m:Label text="수정일자" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="test"/>
+						</template>
+					</Column>
+					<Column
+						width="auto"
+						resizable="false">
+						<multiLabels>
+							<m:Label text="배정사항"/>
+							<m:Label text="한성" textAlign="Center" width="100%"/>
 						</multiLabels>
 						<template>
 							<m:Text text="test"/>

@@ -1,5 +1,15 @@
-.sapUiTableCell.sapUiTableHeaderCell {
-    border-bottom: 0.0625rem solid #e5e5e5;
-    /* border-bottom: 0.0625rem solid black; */
-    /* border-right: 0.0625rem solid #e5e5e5; */
+/* .sapUiTableCell.sapUiTableHeaderCell { */
+    /* border-bottom: 0.0625rem solid #e5e5e5; */
+    /* border-bottom: 0.0625rem solid black;
+    border-right: 0.0625rem solid #e5e5e5; */
+/* } */
+
+/* border-bottom: 0.0625rem solid black; */
+/* border-right: 0.0625rem solid #e5e5e5; */
+td:has(.contractDetail){
+    border-bottom: 0.0625rem solid #e5e5e5!important;
+}
+
+td:has(.assginedDetail) {
+    border-bottom: 0.0625rem solid #e5e5e5!important;
 }
