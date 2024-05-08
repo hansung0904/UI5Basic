@@ -24,7 +24,9 @@
 				"files": [
 					"View.view.xml",
 					"Controller.controller.js",
-					"manifest.json"
+					"manifest.json",
+					"HeaderToolbar.view.xml",
+					"HeaderToolbar.controller.js"
 				]
 			}
 		},
@@ -34,6 +36,39 @@
 					"uri": "css/style.css"
 				}
 			]
+		},
+		"routing": {
+			"config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "sap.ui.table.sample.MultiHeader.View",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+			"routes": [
+				{
+				  "pattern": "",
+				  "name": "overview",
+				  "target": "overview"
+				},
+				{
+				  "pattern": "detail",
+				  "name": "detail",
+				  "target": "detail"
+				}
+			  ],
+			  "targets": {
+				"overview": {
+				  "id": "overview",
+				  "name": "Overview"
+				},
+				"detail": {
+				  "id": "detail",
+				  "name": "Detail"
+				}
+			  }
 		}
 	}
 }
