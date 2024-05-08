@@ -1,273 +1,289 @@
-<mvc:View xmlns:core="sap.ui.core"
+<mvc:View 
+	xmlns:f="sap.f" 
+	xmlns:core="sap.ui.core"
 	controllerName="sap.ui.table.sample.MultiHeader.Controller"
 	xmlns="sap.ui.table"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:m="sap.m"
-	height="100%">
+	height="100%"
+	xmlns:unified="sap.ui.unified">
 	<m:Page
-		showHeader="false"
+		showFooter="true"
+		showHeader="true"
 		enableScrolling="false"
 		class="sapUiContentPadding">
-		<m:content>
-			<m:VBox >
-				<m:IconTabHeader mode="Inline">
-					<m:items>
-						<m:IconTabFilter key="{}" text="루트마스터관리"></m:IconTabFilter>
-						<m:IconTabFilter key="{}" text="연관계획표"></m:IconTabFilter>
-						<m:IconTabFilter key="{}" text="배정마스터"></m:IconTabFilter>
-					</m:items>
-				</m:IconTabHeader>
-
-				<Table
-				id="table1"
-				selectionMode="None"
-				columnHeaderVisible="true"
-				columnHeaderHeight="30%"
-				width="100%"
-				rows="{customer>/modelData}"
-				enableColumnReordering="false"
-				>
-				<extension>
-					<m:OverflowToolbar style="Clear">
-						<m:ToolbarSpacer ></m:ToolbarSpacer>
-						<!-- <m:Title id="title" text="Contacts"/> -->
-						<m:content>
-							<m:ComboBox items="{customer>/weekItems}" placeholder="주차" width="7rem" selectionChange="onComboBoxSelectionWeekChange">
-								<core:Item key="{customer>id}" text="{customer>name}">
-								</core:Item>
-							</m:ComboBox>
-							<m:ComboBox items="{customer>/dayItems}" selectionChange="onComboBoxSelectionChange" placeholder="요일" width="7rem">
-								<core:Item key="{customer>id}" text="{customer>name}">
-								</core:Item>
-							</m:ComboBox>
-							<m:ComboBox items="{customer>/nameItems}" placeholder="김종인" width="7rem" selectionChange="onComboBoxSelectionNameChange">
-								<core:Item key="{customer>id}" text="{customer>name}">
-								</core:Item>
-							</m:ComboBox>
-						</m:content>
-						<m:SearchField id="searchField" width="auto" search=".onSearchField"></m:SearchField>
-					</m:OverflowToolbar>
-				</extension>
-				<columns>
-					<Column	width="3rem" id="supplierColumn" resizable="false">
-						<m:Label text="No" textAlign="Center" width="100%" class="No"/>
+		<m:headerContent>
+			<m:Bar>
+				<m:contentLeft>
+					<m:Image src="lib/img/saplogo.png" width="5%"/>
+						<m:MenuButton id="MenuBtn" text="루트플랜 관리" type="Transparent">
+							<m:Menu itemSelected="onMenuAction">
+							<m:MenuItem id="RootPlan" text="루트플랜 관리" key="RootPlan"></m:MenuItem>
+							<m:MenuItem id="AssignMaster" text="배정마스터 관리" key="AssignMaster"></m:MenuItem>
+							<m:MenuItem text="플랜배정"></m:MenuItem>
+						</m:Menu>
+					</m:MenuButton>
+				</m:contentLeft>
+			</m:Bar>
+		</m:headerContent>
+			<m:content>
+				<m:VBox >
+					<m:IconTabHeader mode="Inline">
+						<m:items>
+							<m:IconTabFilter key="{}" text="루트마스터관리"></m:IconTabFilter>
+							<m:IconTabFilter key="{}" text="연관계획표"></m:IconTabFilter>
+							<m:IconTabFilter key="{}" text="배정마스터"></m:IconTabFilter>
+						</m:items>
+					</m:IconTabHeader>
+					<Table
+					id="table1"
+					selectionMode="None"
+					columnHeaderVisible="true"
+					columnHeaderHeight="30%"
+					width="100%"
+					rows="{customer>/modelData}"
+					enableColumnReordering="false"
+					>
+					<extension>
+						<m:OverflowToolbar style="Clear">
+							<m:ToolbarSpacer ></m:ToolbarSpacer>
+							<!-- <m:Title id="title" text="Contacts"/> -->
+							<m:content>
+								<m:ComboBox items="{customer>/weekItems}" placeholder="주차" width="7rem" selectionChange="onComboBoxSelectionWeekChange">
+									<core:Item key="{customer>id}" text="{customer>name}">
+									</core:Item>
+								</m:ComboBox>
+								<m:ComboBox items="{customer>/dayItems}" selectionChange="onComboBoxSelectionChange" placeholder="요일" width="7rem">
+									<core:Item key="{customer>id}" text="{customer>name}">
+									</core:Item>
+								</m:ComboBox>
+								<m:ComboBox items="{customer>/nameItems}" placeholder="김종인" width="7rem" selectionChange="onComboBoxSelectionNameChange">
+									<core:Item key="{customer>id}" text="{customer>name}">
+									</core:Item>
+								</m:ComboBox>
+							</m:content>
+							<m:SearchField id="searchField" width="auto" search=".onSearchField"></m:SearchField>
+						</m:OverflowToolbar>
+					</extension>
+					<columns>
+						<Column	width="3rem" id="supplierColumn" resizable="false">
+							<m:Label text="No" textAlign="Center" width="100%" class="No"/>
+								<template>
+									<m:Text text="{customer>id}" textAlign="Center" width="100%"/>
+								</template>
+						</Column>
+					<Column
+						width="9rem" id="supplierColumn2" resizable="false">
+						<m:Label text="구분" textAlign="Center" width="100%" class="division"/>
+						<template>
+							<m:Text text="{customer>division}" textAlign="Center" width="100%"/>
+						</template>
+					</Column>
+						<Column
+							width="6rem"
+							headerSpan="10"
+							resizable="false">
+							<multiLabels>
+								<m:Label class="contractDetail" text="계약사항" textAlign="Center" width="100%"/>
+								<m:Label text="견적번호" textAlign="Center" width="100%"/>
+							</multiLabels>
 							<template>
-								<m:Text text="{customer>id}" textAlign="Center" width="100%"/>
+								<m:Text text="{customer>quoteNumber}" wrapping="false" width="100%" textAlign="Center"/>
 							</template>
-							
-					</Column>
-				<Column
-					width="9rem" id="supplierColumn2" resizable="false">
-					<m:Label text="구분" textAlign="Center" width="100%" class="division"/>
-					<template>
-						<m:Text text="{customer>division}" textAlign="Center" width="100%"/>
-					</template>
-				</Column>
-					<Column
-						width="6rem"
-						headerSpan="10"
-						resizable="false">
-						<multiLabels>
-							<m:Label class="contractDetail" text="계약사항" textAlign="Center" width="100%"/>
-							<m:Label text="견적번호" textAlign="Center" width="100%"/>
-						</multiLabels>
-						<template>
-							<m:Text text="{customer>quoteNumber}" wrapping="false" width="100%" textAlign="Center"/>
-						</template>
-					</Column>
-					<Column
-						width="5rem"
-						resizable="false">
-						<multiLabels>
-							<m:Label visible="false"/>
-							<m:Label text="상품코드" textAlign="Center" width="100%"/>
-						</multiLabels>
-						<template>
-							<m:Text text="{customer>productCode}" textAlign="Center" width="100%"/>
-						</template>
-					</Column>
-					<Column
-						width="6rem"
-						resizable="false">
-						<multiLabels>
-							<m:Label visible="false"/>
-							<m:Label text="계약일자" textAlign="Center" width="100%"/>
-						</multiLabels>
-						<template>
-							<m:Text text="{customer>contractDate}" textAlign="Center" width="100%"/>
-						</template>
-					</Column>
-					<Column
-						width="4rem"
-						resizable="false">
-						<multiLabels>
-							<m:Label visible="false"/>
-							<m:Label text="계정수" textAlign="Center" width="100%"/>
-						</multiLabels>
-						<template>
-							<m:Text text="{customer>accountNumber}" textAlign="Center" width="100%"/>
-						</template>
-					</Column>
-					<Column
-						width="6rem"
-						resizable="false">
-						<multiLabels>
-							<m:Label visible="false"/>
-							<m:Label text="고객명" textAlign="Center" width="100%"/>
-						</multiLabels>
-						<template>
-							<m:Text text="{customer>customerName}" width="100%" textAlign="Center"/>
-						</template>
-					</Column>
-					<Column
-						width="5rem"
-						resizable="false">
-						<multiLabels>
-							<m:Label visible="false"/>
-							<m:Label text="고객번호" textAlign="Center" width="100%"/>
-						</multiLabels>
-						<template>
-							<m:Text text="{customer>customerNumber}" textAlign="Center" width="100%"/>
-						</template>
-					</Column>
-					<Column
-						width="4rem"
-						resizable="false">
-						<multiLabels>
-							<m:Label visible="false"/>
-							<m:Label text="총횟수" textAlign="Center" width="100%"/>
-						</multiLabels>
-						<template>
-							<m:Text text="{customer>totalCount}" textAlign="Center" width="100%"/>
-						</template>
-					</Column>
-					<Column
-						width="8rem"
-						resizable="false">
-						<multiLabels>
-							<m:Label visible="false"/>
-							<m:Label text="고객요청일자" textAlign="Center" width="100%"/>
-						</multiLabels>
-						<template>
-							<m:Text text="{customer>recommendationCustomerDate}" textAlign="Center" width="100%"/>
-						</template>
-					</Column>
-					<Column
-						width="7rem"
-						resizable="false">
-						<multiLabels>
-							<m:Label visible="false"/>
-							<m:Label text="고객요청시간" textAlign="Center" width="100%"/>
-						</multiLabels>
-						<template>
-							<m:Text text="{customer>recommendationCustomerTime}" textAlign="Center" width="100%"/>
-						</template>
-					</Column>
-					<Column
-						width="7rem"
-						resizable="false">
-						<multiLabels>
-							<m:Label visible="false"/>
-							<m:Label text="지역" textAlign="Center" width="100%"/>
-						</multiLabels>
-						<template>
-							<m:Text text="{customer>region}"/>
-						</template>
-					</Column>
-					<Column
-						width="5rem"
-						headerSpan="8"
-						resizable="false">
-						<multiLabels> 
-							<m:Label class="assginedDetail" text="배정사항" textAlign="Center" width="100%"/>
-							<m:Label text="담당자" textAlign="Center" width="100%"/>
-						</multiLabels>
-						<template>
-							<m:Text text="{customer>manager}" textAlign="Center" width="100%"/>
-						</template>
-					</Column>
-					<Column
-						width="3rem"
-						resizable="false">
-						<multiLabels>
-							<m:Label text="배정사항"/>
-							<m:Label text="주차" textAlign="Center" width="100%"/>
-						</multiLabels>
-						<template>
-							<m:Text text="{customer>week}" textAlign="Center" width="100%"/>
-						</template>
-					</Column>
-					<Column
-						width="3rem"
-						resizable="false">
-						<multiLabels>
-							<m:Label text="배정사항"/>
-							<m:Label text="요일" textAlign="Center" width="100%"/>
-						</multiLabels>
-						<template>
-							<m:Text text="{customer>Day}" textAlign="Center" width="100%"/>
-						</template>
-					</Column>
-					<Column
-						width="4rem"
-						resizable="false">
-						<multiLabels>
-							<m:Label text="배정사항"/>
-							<m:Label text="총수행" textAlign="Center" width="100%"/>
-						</multiLabels>
-						<template>
-							<m:Text text="{customer>totalExecution}" textAlign="Center" width="100%"/>
-						</template>
-					</Column>
-					<Column
-						width="3rem"
-						resizable="false">
-						<multiLabels>
-							<m:Label text="배정사항"/>
-							<m:Label class="bugIssue" text="해&#10;충&#10;이&#10;슈" textAlign="Center" width="100%" wrapping="true"/>
-						</multiLabels>
-						<template>
-							<m:Text text="{customer>bugIssue}" textAlign="Center" width="100%"/>
-						</template>
-					</Column>
-					<Column
-						width="7rem"
-						resizable="false">
-						<multiLabels>
-							<m:Label text="배정사항"/>
-							<m:Label text="최종방문일자" textAlign="Center" width="auto"/>
-						</multiLabels>
-						<template>
-							<m:Text text="{customer>finalAdjustVisit}" textAlign="Center" width="100%"/>
-						</template>
-					</Column>
-					<Column
-						width="10rem"
-						resizable="false">
-						<multiLabels>
-							<m:Label text="배정사항"/>
-							<m:Label text="최종방문시간" textAlign="Center" width="100%"/>
-						</multiLabels>
-						<template>
-							<m:Text text="{customer>finalVisitTime}" textAlign="Center" width="100%"/>
-						</template>
-					</Column>
-					<Column
-						width="auto"
-						resizable="false"
-						>
-						<multiLabels>
-							<m:Label text="배정사항"/>
-							<m:Label text="수정일자" textAlign="Center" width="100%"/>
-						</multiLabels>
-						<template>
-							<m:Text text="{customer>reformDate}" textAlign="Center" width="100%"/>
-						</template>
-					</Column>
-				</columns>
-			</Table>
-			</m:VBox>
-			
-		</m:content>
+						</Column>
+						<Column
+							width="5rem"
+							resizable="false">
+							<multiLabels>
+								<m:Label visible="false"/>
+								<m:Label text="상품코드" textAlign="Center" width="100%"/>
+							</multiLabels>
+							<template>
+								<m:Text text="{customer>productCode}" textAlign="Center" width="100%"/>
+							</template>
+						</Column>
+						<Column
+							width="6rem"
+							resizable="false">
+							<multiLabels>
+								<m:Label visible="false"/>
+								<m:Label text="계약일자" textAlign="Center" width="100%"/>
+							</multiLabels>
+							<template>
+								<m:Text text="{customer>contractDate}" textAlign="Center" width="100%"/>
+							</template>
+						</Column>
+						<Column
+							width="4rem"
+							resizable="false">
+							<multiLabels>
+								<m:Label visible="false"/>
+								<m:Label text="계정수" textAlign="Center" width="100%"/>
+							</multiLabels>
+							<template>
+								<m:Text text="{customer>accountNumber}" textAlign="Center" width="100%"/>
+							</template>
+						</Column>
+						<Column
+							width="6rem"
+							resizable="false">
+							<multiLabels>
+								<m:Label visible="false"/>
+								<m:Label text="고객명" textAlign="Center" width="100%"/>
+							</multiLabels>
+							<template>
+								<m:Text text="{customer>customerName}" width="100%" textAlign="Center"/>
+							</template>
+						</Column>
+						<Column
+							width="5rem"
+							resizable="false">
+							<multiLabels>
+								<m:Label visible="false"/>
+								<m:Label text="고객번호" textAlign="Center" width="100%"/>
+							</multiLabels>
+							<template>
+								<m:Text text="{customer>customerNumber}" textAlign="Center" width="100%"/>
+							</template>
+						</Column>
+						<Column
+							width="4rem"
+							resizable="false">
+							<multiLabels>
+								<m:Label visible="false"/>
+								<m:Label text="총횟수" textAlign="Center" width="100%"/>
+							</multiLabels>
+							<template>
+								<m:Text text="{customer>totalCount}" textAlign="Center" width="100%"/>
+							</template>
+						</Column>
+						<Column
+							width="8rem"
+							resizable="false">
+							<multiLabels>
+								<m:Label visible="false"/>
+								<m:Label text="고객요청일자" textAlign="Center" width="100%"/>
+							</multiLabels>
+							<template>
+								<m:Text text="{customer>recommendationCustomerDate}" textAlign="Center" width="100%"/>
+							</template>
+						</Column>
+						<Column
+							width="7rem"
+							resizable="false">
+							<multiLabels>
+								<m:Label visible="false"/>
+								<m:Label text="고객요청시간" textAlign="Center" width="100%"/>
+							</multiLabels>
+							<template>
+								<m:Text text="{customer>recommendationCustomerTime}" textAlign="Center" width="100%"/>
+							</template>
+						</Column>
+						<Column
+							width="7rem"
+							resizable="false">
+							<multiLabels>
+								<m:Label visible="false"/>
+								<m:Label text="지역" textAlign="Center" width="100%"/>
+							</multiLabels>
+							<template>
+								<m:Text text="{customer>region}"/>
+							</template>
+						</Column>
+						<Column
+							width="5rem"
+							headerSpan="8"
+							resizable="false">
+							<multiLabels> 
+								<m:Label class="assginedDetail" text="배정사항" textAlign="Center" width="100%"/>
+								<m:Label text="담당자" textAlign="Center" width="100%"/>
+							</multiLabels>
+							<template>
+								<m:Text text="{customer>manager}" textAlign="Center" width="100%"/>
+							</template>
+						</Column>
+						<Column
+							width="3rem"
+							resizable="false">
+							<multiLabels>
+								<m:Label text="배정사항"/>
+								<m:Label text="주차" textAlign="Center" width="100%"/>
+							</multiLabels>
+							<template>
+								<m:Text text="{customer>week}" textAlign="Center" width="100%"/>
+							</template>
+						</Column>
+						<Column
+							width="3rem"
+							resizable="false">
+							<multiLabels>
+								<m:Label text="배정사항"/>
+								<m:Label text="요일" textAlign="Center" width="100%"/>
+							</multiLabels>
+							<template>
+								<m:Text text="{customer>Day}" textAlign="Center" width="100%"/>
+							</template>
+						</Column>
+						<Column
+							width="4rem"
+							resizable="false">
+							<multiLabels>
+								<m:Label text="배정사항"/>
+								<m:Label text="총수행" textAlign="Center" width="100%"/>
+							</multiLabels>
+							<template>
+								<m:Text text="{customer>totalExecution}" textAlign="Center" width="100%"/>
+							</template>
+						</Column>
+						<Column
+							width="3rem"
+							resizable="false">
+							<multiLabels>
+								<m:Label text="배정사항"/>
+								<m:Label class="bugIssue" text="해&#10;충&#10;이&#10;슈" textAlign="Center" width="100%" wrapping="true"/>
+							</multiLabels>
+							<template>
+								<m:Text text="{customer>bugIssue}" textAlign="Center" width="100%"/>
+							</template>
+						</Column>
+						<Column
+							width="7rem"
+							resizable="false">
+							<multiLabels>
+								<m:Label text="배정사항"/>
+								<m:Label text="최종방문일자" textAlign="Center" width="auto"/>
+							</multiLabels>
+							<template>
+								<m:Text text="{customer>finalAdjustVisit}" textAlign="Center" width="100%"/>
+							</template>
+						</Column>
+						<Column
+							width="10rem"
+							resizable="false">
+							<multiLabels>
+								<m:Label text="배정사항"/>
+								<m:Label text="최종방문시간" textAlign="Center" width="100%"/>
+							</multiLabels>
+							<template>
+								<m:Text text="{customer>finalVisitTime}" textAlign="Center" width="100%"/>
+							</template>
+						</Column>
+						<Column
+							width="auto"
+							resizable="false"
+							>
+							<multiLabels>
+								<m:Label text="배정사항"/>
+								<m:Label text="수정일자" textAlign="Center" width="100%"/>
+							</multiLabels>
+							<template>
+								<m:Text text="{customer>reformDate}" textAlign="Center" width="100%"/>
+							</template>
+						</Column>
+					</columns>
+				</Table>
+				</m:VBox>
+				
+			</m:content>
 	</m:Page>
 </mvc:View>

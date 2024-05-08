@@ -3,7 +3,6 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-
 ], function(Controller, JSONModel) {
 	"use strict";
 
@@ -18,7 +17,7 @@ sap.ui.define([
 					{id: "4", division: "부정기", 			quoteNumber: "KMHD1*****", 	productCode: "Code1", contractDate: "2024/04/12", accountNumber:"2",  customerName: "세븐일레븐", customerNumber: "IU974B", totalCount: "2",  recommendationCustomerDate: "2024/04/26", recommendationCustomerTime: "13:50", region: "강동구/암사동", manager: "미배정", week: "-", Day: "-",  totalExecution: "0/2",  bugIssue: "N", finalAdjustVisit: "",           finalVisitTime: "-",					reformDate: ""},
 					{id: "5", division: "VOC",  			quoteNumber: "KMHD1*****", 	productCode: "Code1", contractDate: "2024/04/12", accountNumber:"-",  customerName: "엔딩스터디", customerNumber: "IU974B", totalCount: "-", recommendationCustomerDate: "-", 			recommendationCustomerTime: "13:50", region: "강동구/암사동", manager: "김종인", week: "-", Day: "-", totalExecution: "-",    bugIssue: "N", finalAdjustVisit: "-",           finalVisitTime: "-",					reformDate: "2024/04/12"},
 					{id: "6", division: "VOC",  			quoteNumber: "-", 			productCode: "Code1", contractDate:"2024/04/12" , accountNumber:"-",  customerName: "매머드커피", customerNumber: "IU974B", totalCount: "-", recommendationCustomerDate: "-", 			recommendationCustomerTime: "13:50", region: "강동구/암사동", manager: "김종인", week: "-", Day: "-", totalExecution: "-",    bugIssue: "N", finalAdjustVisit: "-",           finalVisitTime: "-",					reformDate: "2024/04/12"},
-					{id: "7", division: "VOC",  			quoteNumber: "-", 			productCode: "Code1", contractDate:"2024/04/12" , accountNumber:"-",  customerName: "이느커피",   customerNumber: "IU974B", totalCount: "-", recommendationCustomerDate: "-", 			recommendationCustomerTime: "13:50", region: "강동구/암사동", manager: "김종인", week: "-", Day: "-", totalExecution: "-",    bugIssue: "N", finalAdjustVisit: "-",           finalVisitTime: "-",					reformDate: "2024/04/12"},
+					{id: "7", division: "VOC",  			quoteNumber: "-", 			productCode: "Code1", contractDate:"2024/04/12" , accountNumber:"-",  customerName: "인크커피",   customerNumber: "IU974B", totalCount: "-", recommendationCustomerDate: "-", 			recommendationCustomerTime: "13:50", region: "강동구/암사동", manager: "김종인", week: "-", Day: "-", totalExecution: "-",    bugIssue: "N", finalAdjustVisit: "-",           finalVisitTime: "-",					reformDate: "2024/04/12"},
 					{id: "8", division: "VOC",  			quoteNumber: "-", 			productCode: "Code1", contractDate:"2024/04/12" , accountNumber:"-",  customerName: "이마트가양", customerNumber: "IU974B", totalCount: "-", recommendationCustomerDate: "-", 			recommendationCustomerTime: "13:50", region: "강동구/암사동", manager: "김종인", week: "-", Day: "-", totalExecution: "-",    bugIssue: "N", finalAdjustVisit: "-",           finalVisitTime: "-",					reformDate: "2024/04/12"},
 					{id: "9", division: "정기", 			quoteNumber: "KMHD1*****", 	productCode: "Code1", contractDate: "2024/04/12", accountNumber:"10", customerName: "미니스톱",   customerNumber: "IU974B", totalCount: "10",recommendationCustomerDate: "연간계획표",   recommendationCustomerTime: "13:50", region: "강동구/암사동", manager: "미배정", week: "",  Day: "",  totalExecution: "",     bugIssue: "N", finalAdjustVisit: "",            finalVisitTime: "-",					 reformDate: ""},
 					{id: "10",division: "정기(타지사 이관)", quoteNumber: "KMHD1*****",  productCode: "Code1", contractDate: "2024/04/12", accountNumber:"10", customerName: "GS편의점",   customerNumber: "IU974B", totalCount: "10",recommendationCustomerDate: "연간계획표",   recommendationCustomerTime: "13:50", region: "강동구/암사동", manager: "미배정", week: "",  Day: "",  totalExecution: "",     bugIssue: "N", finalAdjustVisit: "",            finalVisitTime: "-",				  reformDate: ""},
@@ -30,6 +29,9 @@ sap.ui.define([
 			oView.setModel(oModel,"customer");
 
 			const dayItems = [
+				{
+					id:"week", name: "==요일=="
+				},
 				{
 					id : "none", name: "선택안함"
 				},
@@ -96,20 +98,7 @@ sap.ui.define([
 			    oElement2.parentNode.removeChild(oElement2);
 			}
 
-	  	},
-
-		//   onAfterRendering: function() {
-		// 	setTimeout(function() {
-		// 		var oTable = this.getView().byId("table1");
-		// 		var oHeader = oTable.$().find("thead")[0]; // 테이블의 헤더 요소 가져오기
-		
-		// 		var oColumnHeaders = oHeader.getElementsByTagName("th"); // 헤더 셀들 가져오기
-		// 		for (var i = 0; i < oColumnHeaders.length; i++) {
-		// 			var oHeaderCell = oColumnHeaders[i];
-		// 			oHeaderCell.setAttribute('rowspan', '2'); // rowspan 설정
-		// 		}
-		// 	}.bind(this), 0);
-		// },
+	  	},	
 
 		/*
 			검색필드
@@ -219,6 +208,7 @@ sap.ui.define([
 				oBinding.filter([oFilter]);
 			}
 		},
+		
 		/*
 			매니저 콤보박스
 		*/
@@ -258,6 +248,20 @@ sap.ui.define([
 				);
 				oBinding.filter([oFilter]);
 			}
+		},
+
+		onMenuAction(oEvent){
+			const route = oEvent.getParameter("item").getProperty("key");
+			
+			if(route == "RootPlan"){
+				oRouter.navTo("view");
+			}
+			else if(route == "AssignMaster"){
+				oRouter.navTo("master");
+			}
+			else{
+				
+			};
 		},
 	});
 });
