@@ -3,7 +3,7 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-], function(Controller, JSONModel) {
+], function(Controller, JSONModel, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("sap.ui.table.sample.MultiHeader.Controller", {
@@ -30,9 +30,6 @@ sap.ui.define([
 
 			const dayItems = [
 				{
-					id:"week", name: "==요일=="
-				},
-				{
 					id : "none", name: "선택안함"
 				},
 				{
@@ -42,7 +39,6 @@ sap.ui.define([
 					id: "-", name:"-"
 				}
 			]
-			
 			this.getView().getModel("customer").setProperty("/dayItems", dayItems);
 
 			const nameItems = [
@@ -104,88 +100,150 @@ sap.ui.define([
 			검색필드
 		*/
 		onSearchField: function (oEvent) {
-			let aFilter = [];
-			let sQuery = oEvent.getParameter("query");
+			// let aFilter = [];
+			// let sQuery = oEvent.getParameter("query");
 
-			if(sQuery) {
+			// if(sQuery) {
 
-				// 고객명
-				let customerNameFilter = new sap.ui.model.Filter(
-					"customerName",
-					"Contains",
-					sQuery
-				);
+			// 	// 고객명
+			// 	let customerNameFilter = new sap.ui.model.Filter(
+			// 		"customerName",
+			// 		"Contains",
+			// 		sQuery
+			// 	);
 
-				// 견적번호
-				let quoteNumberFilter = new sap.ui.model.Filter(
-					"quoteNumber",
-					"Contains",
-					sQuery
-				);
+			// 	// 견적번호
+			// 	let quoteNumberFilter = new sap.ui.model.Filter(
+			// 		"quoteNumber",
+			// 		"Contains",
+			// 		sQuery
+			// 	);
 
-				// 고객번호
-				let customerNumberFilter = new sap.ui.model.Filter(
-					"customerNumber",
-					"Contains",
-					sQuery
-				);
+			// 	// 고객번호
+			// 	let customerNumberFilter = new sap.ui.model.Filter(
+			// 		"customerNumber",
+			// 		"Contains",
+			// 		sQuery
+			// 	);
 
-				// 지역
-				let regionFilter = new sap.ui.model.Filter(
-					"region",
-					"Contains",
-					sQuery
-				);
+			// 	// 지역
+			// 	let regionFilter = new sap.ui.model.Filter(
+			// 		"region",
+			// 		"Contains",
+			// 		sQuery
+			// 	);
 
-				// 요일
-				let dayFilter = new sap.ui.model.Filter(
-					"Day",
-					"Contains",
-					sQuery
-				);
+			// 	// 요일
+			// 	let dayFilter = new sap.ui.model.Filter(
+			// 		"Day",
+			// 		"Contains",
+			// 		sQuery
+			// 	);
 
-				// 담당자
-				let managerFilter = new sap.ui.model.Filter(
-					"manager",
-					"Contains",
-					sQuery
-				);
+			// 	// 담당자
+			// 	let managerFilter = new sap.ui.model.Filter(
+			// 		"manager",
+			// 		"Contains",
+			// 		sQuery
+			// 	);
 
-				// 총횟수
-				let totalExecutionFilter = new sap.ui.model.Filter(
-					"totalExecution",
-					"Contains",
-					sQuery
-				);
+			// 	// 총횟수
+			// 	let totalExecutionFilter = new sap.ui.model.Filter(
+			// 		"totalExecution",
+			// 		"Contains",
+			// 		sQuery
+			// 	);
 
-				// 구분 -> 어차피 data 형태로 값이 넘어오면 ID 값이나 이런것들로 처리 해주기 때문에 큰 상관은 없을 듯
-				let divisionFilter = new sap.ui.model.Filter(
-					"division",
-					"Contains",
-					sQuery
-				);
+			// 	// 구분 -> 어차피 data 형태로 값이 넘어오면 ID 값이나 이런것들로 처리 해주기 때문에 큰 상관은 없을 듯
+			// 	let divisionFilter = new sap.ui.model.Filter(
+			// 		"division",
+			// 		"Contains",
+			// 		sQuery
+			// 	);
 
-				let combinedFilter = new sap.ui.model.Filter({
-						filters: [
-							customerNameFilter,
-							quoteNumberFilter,
-							customerNumberFilter,
-							regionFilter,
-							dayFilter,
-							managerFilter,
-							totalExecutionFilter,
-							divisionFilter
-						],
-						and: false,
-					});
-				aFilter.push(combinedFilter);
+			// 	let combinedFilter = new sap.ui.model.Filter({
+			// 			filters: [
+			// 				customerNameFilter,
+			// 				quoteNumberFilter,
+			// 				customerNumberFilter,
+			// 				regionFilter,
+			// 				dayFilter,
+			// 				managerFilter,
+			// 				totalExecutionFilter,
+			// 				divisionFilter
+			// 			],
+			// 			and: false,
+			// 		});
+			// 	aFilter.push(combinedFilter);
+			// }
+
+			// // filter binding
+			// let oTable = this.byId("table1");
+			// let oBinding = oTable.getBinding("rows");
+			// oBinding.filter(aFilter);
+
+			// var aFilters = [];
+			// var sQuery = oEvent.getSource().getValue();
+			// if (sQuery && sQuery.length > 0) {
+			// 	var filter = new Filter("customer", FilterOperator.Contains, sQuery);
+			// 	aFilters.push(filter);
+			// }
+
+			// // update list binding
+			// var oList = this.byId("table1");
+			// var oBinding = oList.getBinding("rows");
+			// oBinding.filter(aFilters, "Application");
+
+			let aFilters = [];
+			let sQuery = oEvent.getSource().getValue();
+			if (sQuery && sQuery.length > 0) {
+				let aProperties = [	"id", 								// No.
+							  		"division", 						// 구분
+							  		"quoteNumber",						// 견적번호
+									"productCode",						// 상품코드
+									"contractDate",						// 계약일자
+									"accountNumber",					// 계정수
+									"customerName",						// 고객명
+									"customerNumber",					// 고객번호
+									"totalCount",						// 총횟수
+								    "recommendationCustomerDate",		// 고객요청일자
+									"recommendationCustomerTime",		// 고객요청시간
+									"region",							// 지역
+									"manager",							// 담당자
+									"week",								// 주차
+									"Day",								// 요일
+									"totalExecution",					// 총수행
+									"bugIssue",							// 해충이슈
+									"finalAdjustVisit",					// 최종방문일자
+									"finalVisitTime",					// 최종방문시간
+									"reformDate"						// 수정일자
+								  ];
+								  
+				// 필터링할 속성들의 배열
+				let aFilterArray = []; // 속성별 필터 배열을 저장할 배열
+
+				// 각 속성에 대한 필터를 생성하여 배열에 추가
+				aProperties.forEach(function(property) {
+					let oFilter = new Filter(property, FilterOperator.Contains, sQuery);
+					aFilterArray.push(oFilter);
+				});
+
+				// 속성별 필터 배열을 OR 조건으로 결합하여 최종 필터 생성
+				let oCombinedFilter = new Filter({
+					filters: aFilterArray,
+					and: false // OR 조건
+				});
+
+				aFilters.push(oCombinedFilter);
 			}
 
-			// filter binding
-			let oTable = this.byId("table1");
-			let oBinding = oTable.getBinding("rows");
-			oBinding.filter(aFilter);
+			// update list binding
+			let oList = this.byId("table1");
+			let oBinding = oList.getBinding("rows");
+			oBinding.filter(aFilters, "Application");
+
 		},
+			
 
 		onComboBoxSelectionChange: function (event) {
 			let selectedItem = event.getParameter("selectedItem");
@@ -254,11 +312,13 @@ sap.ui.define([
 			const route = oEvent.getParameter("item").getProperty("key");
 			
 			if(route == "RootPlan"){
-				oRouter.navTo("view");
-			}
-			else if(route == "AssignMaster"){
-				oRouter.navTo("master");
-			}
+				let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                oRouter.navTo("view");
+            }
+            else if(route == "AssignMaster"){
+				let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                oRouter.navTo("master");
+            }
 			else{
 				
 			};
