@@ -319,3 +319,27 @@ Body에 액세스 하려면 ```${in.body}```를 사용한다.
 
 *관련 keystore에 개인 키가 포함되어 있어야 하며 그렇지 않으면 메시지 내용의 복호화가 작동하지 않는다. <br> 또한 수신된 서명된 메시지가 진짜인지 확인하기 위해서 서명된 데이터 객체의 서명을 확인할 수도 있다.*
 ![](/CPI%20정리/imgCPI/Encryptor&Decryptor.png)
+
+## Security Elements : Message Signer
+*이 프로세스의 단계는 Sender의 신원을 Participants에게 알려서 클라우드에서 보내는 메ㅣ지의 진위를 확인하는데 사용된다. <br> 이 작업은 서명 서명 알고리즘을 사용해서 메시지에 하나 이상의 개인키로 서명해서 사용자의 신원을 보장한다.*
+
+**Working with PKCS#7/CMS Signer** <br>
+
+*통합 흐름 모델에서 하나 이상의 개인 키 별칭을 제공하여 PKCS#7/CMS 서명자를 구성한다. 
+서명자는 별칭 이름을 사용하여 키 저장소에서 DSA 또는 RSA 유형의 개인 키를 가져온다. 
+또한 SHA512/RSA 또는 SHA/DSA와 같은 다이제스트 및 암호화 알고리즘의 조합인 각 키 유형에 대한 서명 알고리즘을 지정할 수 있다. 
+PKCS#7/CMS 서명자는 알고리즘을 사용하여 해당 서명을 생성한다. 
+서명자가 생성한 데이터를 서명된 데이터라고 한다.*
+![](/CPI%20정리/imgCPI/MessageSigner.png)
+
+## Security Elements: Signature Verifier
+
+*이 프로세스 단계는 클라우드를 통해 수신된 서명된 메시지가 진짜인지 확인하는데 사용된다.*
+
+1. *Integration flow model 에서는 서명된 데이터가 배치된 위치에 따라 공개 키 별명 및 메시지 헤더 또는 Body가 Base64로   인코딩되었는지 여부에 대한 정보를 제공해서 verifier를 구성한다.*
+
+*서명된 데이터에 원본 내용이 포함된 경우 verifier에서 메시지 Body에 서명된 데이터를 제공한다.*
+*서명된 데이터에 원본 내용이 포함되어 있지 않은 경우 verifier에서 SapCmsSignedData 헤더에 서명된 데이터를 입력하고 메시지 Body에 원본 내용을 입력한다.*
+
+2. *Verifier는 공개 키 별명을 사용해서 메시지 digest를 복호화하는데 사용되는 DSA 또는 RSA 유형의 공개 키를 가져온다. <br> 이러한 방식으로 메시지에 서명한 참가자의 진위가 확인된다. <br> verification에 성공하지 못한 경우 verfier는 예외를 던져 사용자에게 알린다.*
+![](/CPI%20정리/imgCPI/SignatureVerifier.png)
