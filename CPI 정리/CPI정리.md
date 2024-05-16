@@ -245,3 +245,77 @@ Body에 액세스 하려면 ```${in.body}```를 사용한다.
 ![](/CPI%20정리/imgCPI/DatastoreOperations2.png)
 
 4. ***Delete Operation*** : *이 작업을 통해서 DataStore에서 메시지 삭제를 트리거 할 수 있다. <br> 삭제할 메시지의 메시지 ID를 헤더 SapDataStoreId 또는 Properties View의 메시지 ID 필드에서 지정할 수 있다. <br> 메시지 ID를 직접 제공하는 대신에 메시지 ID 필드에 ```${header.<headername containing message ID>}``` 또는 ```${xpath.<node containing message ID>}```와 같은 식을 입력할 수도 있다. <br> 여러 메시지를 삭제하려면 SapDataStoreID 헤더에서 org.w3c.dom.NodeList와 함께 XPath 조건을 사용한다.*
+![](/CPI%20정리/imgCPI/DatastoreOperations3.png)<br>
+![](/CPI%20정리/imgCPI/DatastoreOperations4.png)
+
+## Write Variables- Setting Global Variables
+*Write Variable Step을 사용하면 Integeration 개발자가 동일한 iFlow 내에서 메시지 flow에 걸쳐 사용할 수 있는 값을 저장하거나 Tenent내의 서로 다른 iFlow에 걸쳐 사용할 수 있다.*
+
+1. *동일한 iFlow 내에서 미시지 흐름 전반에 걸쳐 사용할 수 있는 변수를 정의한다. <br> Content Modifier step에서 Write Variables를 사용해서 저장된 값에 액세스할 수 있다.*
+2. *이 옵션을 사용해서 동일한 테넌트 내의 서로 다른 iFlow에서 변수에 액세스할 수 있다.*
+
+***참고 : Global을 On(WebUI)으로 설정하거나 "Global Scope(Eclipse)" 확인란을 선택하면 모든 iFlow에서 변수에 액세스할 수 있다.***
+![](/CPI%20정리/imgCPI/SettingGlobalVariables.png)
+
+## Write Variables- Accessing Global Variables in iFlow
+*Write Variable Step을 사용하면 통합 개발자가 동일한 iFlow 내에서 Message Flow에 걸쳐 사용할 수 있는 값을 저장하거나 테넌트 내의 서로 다른 iFlow에 걸쳐 사용할 수 있다.*
+
+*이러한 변수는 Content Modifier의 Header 또는 Properties를 사용해서 iFlow에서 액세스할 수 있다.*
+![](/CPI%20정리/imgCPI/AccessingGlobalVariablesIniFlow.png)
+
+## Tasks: Service Call > Request-Reply
+*Service Call은 외부 시스템을 호출하는데 사용된다. <br> 이러한 호출들은 타겟 시스템으로부터 또는 타겟 시스템으로의 데이터 트랜잭션을 가능하게 한다.*
+1. ***Request-Reply*** : *이 서비스 호출의 변형은 송신자와 수신자 시스템 간의 요청 및 응답 상호 작용을 가능하게 하는데 사용된다. <br> 회신으로 받은 응답은 다음 단계로 넘어간다.*<br>
+![](/CPI%20정리/imgCPI/Request-Reply1.png)<br>
+![](/CPI%20정리/imgCPI/Request-Reply2.png)
+
+## Service Call > Content Enricher (Combine)
+*Content Enricher는 Integeration Process에서 원래 메시지와 함께 Playload의 내용을 추가한다. <br> 이것은 두 개의 개별 메시지를 하나의 강화된 Payload로 변환한다. 이 기능을 사용하면 Integration Process에서 외부 호출로 추가 데이터를 얻을 수 있다.*
+
+*Integration flow의 첫 번째 메시지를 원본 메시지로 간주하고 Integration Process에서 External Call을 통해 얻은 메시지를 조회 메시지로 간주한다.*
+
+*두 가지 방법 중 하나를 선택해서 이 두 가지 Payload를 하나의 메시지로 강화할 수 있다.*
+![](/CPI%20정리/imgCPI/ContentEnricherCombine.png)<br>
+![](/CPI%20정리/imgCPI/ContentEnricherEnrich.png)
+
+## Service Call > Send
+*Send 단계는 응답이 예상되지 않는 시나리오 및 어댑터에 대한 Receiver system에 대한 서비스 호출을 구성하는데 사용된다.*
+
+*이 단계는 어댑터 유형(전송 단계와 Receiver 사이의 채널)과 함께 사용할 수 있다.*
+
+→ Mail Adapter<br>
+→ SFTP Adapter<br>
+![](/CPI%20정리/imgCPI/Send.png)
+
+## Events
+1. **Start Message** - *Integration Process의 첫 번째 단계, 스케줄이 지정되지 않은 발신자에 의해 트리거되는 경우(타이머 포함)*
+
+2. **End Message** - *메시지가 receiver에게 전달되기 전에 Integration Process의 마지막 단계*
+
+3. **Terminate Message** - *Reciver에게 메시지를 보내지 않고 프로세스를 종료하는데 사용*
+
+4. **Error Start Event** - *예외 하위 프로세스에서만 사용되며, Embedded된 Integration Process에서 예외가 발생할 경우 Start로 사용된다.*
+
+5. **Error End Event** - *예외를 기본 예외 처리기로 되돌리는데 사용된다.*
+
+6. **Escalation** - *메시지 처리를 중지한다. 동기화된 메시지의 경우 보낸 사람에게 오류 메시지가 전송된다.*
+
+7. **Start Event** - *Local Integration Process의 시작*
+
+8. **End Evnet** - *Local Integration Process의 종료*
+
+9. **Timer** - *사용자가 특정 일정에 따라 자동으로 시작되도록 프로세스를 구성한다.*
+![](/CPI%20정리/imgCPI/Events.png)
+
+## Security Elements : Content Encryptor & Content Decryptor
+
+**Content Encryptor** <br>
+*이 프로세스 단계는 내용을 암호화해서 메시지 내용이 클라우드의 다른 Participants에게 전송되는 동안 변경되지 않도록 보호하는데 사용된다.*
+
+*메시지 내용을 암호화할 수 있을 뿐만 아니라 content에 서명해서 참가자에게 신원을 알림으로써 보내는 메시지의 진위를 확인한다. <br> 이 작업은 signature 알고리즘을 사용해서 메시지에 하나 이상의 개인 키로 signing함으로써 자신의 신원을 보장한다.*
+
+**Content Decryptor** <br>
+*이 프로세스 단계는 클라우드 참가자로부터 받은 메시지를 복호화하는데 사용된다.*
+
+*관련 keystore에 개인 키가 포함되어 있어야 하며 그렇지 않으면 메시지 내용의 복호화가 작동하지 않는다. <br> 또한 수신된 서명된 메시지가 진짜인지 확인하기 위해서 서명된 데이터 객체의 서명을 확인할 수도 있다.*
+![](/CPI%20정리/imgCPI/Encryptor&Decryptor.png)
