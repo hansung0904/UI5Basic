@@ -3,7 +3,7 @@
 ## Introduction
 *SAP CPI에는 백엔드 시스템에서 OData 서비스를 호출하는데 사용할 수 있는 OData Receiver Adapter가 있다. <br> GET,POST,PATCH,MERGE,DELETE 작업에 모두 사용할 수 있다.*
 
-*OData Adapter의 "Connection" 속성에서 "CSRF Protected" 플래그를 찾을 수 있다. <br> CSRF는 사이트가 사용자의 브라우저에 가지고 있는 trust를 악용하는 특정 유형의 악의적인 공격인 Cross-Site Request Forgery(사이트 간 요청 위조)을 나타낸다.*
+*OData Adapter의 "Connection" 속성에서 "CSRF Protected" 플래그를 찾을 수 있다. <br> CSRF는 사이트가 사용자의 브라우저에 가지고 있는 trust를 악용하는 특정 유형의 악의적인 공격인 Cross-Site Request Forgery(사이트 간 요청 위조)을 나타낸다.*<br>
 ![](/CPI%20CSRFProtected//img/CSRFProtected.png) <br>
 
 *OData 어댑터에서 CSRF Protected는 기술적으로 OData 엔드포인트에 두 개의 HTTP 호출이 수행되는 방식으로 작동되는데 첫 번째 호출 동안 OData의 어댑터는 CSRF 토큰만 가져오고 두 번째(실제) HTTP 호출은 이전 Response에서 서버에 의해 제공된 토큰으로 수행된다.*
